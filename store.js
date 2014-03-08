@@ -1,5 +1,5 @@
 var historyPriority = 2, bookmarkPriority = 1, domainPriority = 0;
-var randomPriority = 0;
+var randomPriority = 0;//to randomly priporitize the urls with same parameters(except url and title)
 var historySize = 100000;
 
 var urlStore;
@@ -51,14 +51,13 @@ function loadBookmarks () {
 			}
 		};
 		itemsFetched++;
-		console.log(bookmarks.length);
-		console.log("Bookmarks Fetched");
+		// console.log(bookmarks.length);
+		// console.log("Bookmarks Fetched");
 	})
 }	
 
 function loadHistory () {
 	if( historyStore ) {
-		console.log(historyStore);
 		return;
 	}
 	historyStore = [];
@@ -73,10 +72,9 @@ function loadHistory () {
 			}
 			historyStore.push( Object( {url: createFullUrl(chromeHistory[i].url), title: chromeHistory[i].title, visitCount: chromeHistory[i].visitCount, lastVisitTime: chromeHistory[i].lastVisitTime, type: "history"} ) );
 		}
-		// qsort(history, 0, history.length - 1);
 		itemsFetched++;
-		console.log(historyStore.length);
-		console.log("History Fetched");
+		// console.log(historyStore.length);
+		// console.log("History Fetched");
 	})
 };
 
@@ -215,10 +213,6 @@ function createFullUrl (partialUrl) {
 	}
 	if( url[url.length - 1] == '/' ) {
 		url = url.substring(0, url.length - 1);
-		console.log(url, partialUrl);
-	}
-	if( url == "http:/" ) {
-		console.log(url, partialUrl);
 	}
 	return url;
 }

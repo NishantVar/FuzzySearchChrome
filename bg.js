@@ -6,7 +6,7 @@ var currentlySearching = false, initialized = false, suggestionsInitialized = fa
 var bookmarks, historyStore;
 
 function fetchData () {
-	itemsToFetch = 2;
+	itemsToFetch = 2;//history and bookmarks
 	randomPriority = 0;
 
 	loadBookmarks();
@@ -59,12 +59,12 @@ function addItemsToSuggestions () {
 	for(var i = 0 ; i < defaultSearchSpace.length ; i++) {
 		currentSearchSpace.push(defaultSearchSpace[i]);
 	}
-	console.log("searchSpace length " + defaultSearchSpace.length);
+	// console.log("searchSpace length " + defaultSearchSpace.length);
 	suggestionsInitialized = true;
 }
 
 function setSearchText (text, suggest) {
-	console.log("start search  " + text);
+	// console.log("start search  " + text);
 	input = text;
 	suggestFunction = suggest;
 	showSuggestions = true;
@@ -92,9 +92,9 @@ chrome.omnibox.onInputEntered.addListener(
 fetchData();
 
 chrome.omnibox.onInputCancelled.addListener(function () {
-	// currentlySearching = false;
-	// defaultSearchSpace = [];
-	// currentSearchSpace = [];
-	// lastSearchText = "";
-	console.log("cancelled");
+	currentlySearching = false;
+	defaultSearchSpace = [];
+	currentSearchSpace = [];
+	lastSearchText = "";
+	// console.log("cancelled");
 });

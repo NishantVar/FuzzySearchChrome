@@ -119,6 +119,7 @@ function forwardSearch (startIdx) {
 	currentSearchSpace = newSearchSpace;
 }
 
+//used when backspace is used
 function backwardSearch (endIdx) {
 	var lastMatched;
 	var newSearchSpace = [];
@@ -156,9 +157,6 @@ function backwardSearch (endIdx) {
 				sug.penalty = Math.min(sug.penalty, temp.penalty);
 			}
 
-			if( sug.penalty > threshold ) {
-				console.log("something wrong");
-			}
 			newSearchSpace.push(sug);
 		}
 	}
