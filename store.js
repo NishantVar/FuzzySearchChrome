@@ -43,7 +43,7 @@ function loadBookmarks () {
 		var bk;
 		while(toVisit.length > 0) {
 			bk = toVisit.pop();
-			if( bk.url != null ) {
+			if( typeof bk.url != 'undefined' && bk.url != null ) {
 				bookmarks.push(Object({url: createFullUrl(bk.url), title:bk.title, visitCount: 0, lastVisitTime: -1, type: "bookmark"}));
 			}
 			if( bk.children != null ) {
@@ -68,6 +68,9 @@ function loadHistory () {
 		maxResults: historySize
 	}, function (chromeHistory) {
 		for(var i = 0 ; i < chromeHistory.length ; i++) {
+			if( chromeHistory[i].url == null || typeof chromeHistory[i].url == 'undefined' ) {
+				continue;
+			}
 			historyStore.push( Object( {url: createFullUrl(chromeHistory[i].url), title: chromeHistory[i].title, visitCount: chromeHistory[i].visitCount, lastVisitTime: chromeHistory[i].lastVisitTime, type: "history"} ) );
 		}
 		// qsort(history, 0, history.length - 1);
@@ -204,13 +207,18 @@ function qsort (arr, start, end) {
 
 function createFullUrl (partialUrl) {
 	var url;
+	var last = url;
 	if (!/^[a-z]{3,}:\/\//.test(partialUrl)) {
 		url = "http://" + partialUrl;
 	} else {
 		url = partialUrl;
 	}
-	if( url[url.length - 1] != '/' ) {
-		url += "/";
+	if( url[url.length - 1] == '/' ) {
+		url = url.substring(0, url.length - 1);
+		console.log(url, partialUrl);
+	}
+	if( url == "http:/" ) {
+		console.log(url, partialUrl);
 	}
 	return url;
 }
