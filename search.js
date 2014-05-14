@@ -7,23 +7,15 @@ var stepPenalty = 5, skipPenalty = 1;
 
 var unitErrorLength = 5;
 
-function performSearch () {
-	if( !currentlySearching ) {
-		return;
-	}
-	if( !suggestionsInitialized ) {
-		setTimeout(performSearch, 100);
-		return;
-	}
-	searchText = input;
-	// console.log("performSearch  " + searchText);
-	if( searchText == lastSearchText ) {
-		if( suggestFunction != lastSuggestFunction ) {
-			suggest();
-			lastSuggestFunction = suggestFunction;
-		}
-		setTimeout(performSearch, 100);
-		return;
+var maxResultsToShow = 10, suggestionsStart = 0;
+
+function performSearch (text, tabId) {
+	searchText = text;
+
+	if( defaultSearchSpace.length < 500 ) {
+		unitErrorLength = 4;
+	} else {
+		unitErrorLength = 5;
 	}
 
 	var pattern = searchText;
@@ -42,52 +34,48 @@ function performSearch () {
 
 	lastSearchText = searchText;
 	sortSuggestions(currentSearchSpace, 0, currentSearchSpace.length - 1);
-	suggest();
-	lastSuggestFunction = suggestFunction;
-	// console.log("finished performSearch  " + searchText);
-	performSearch();
+	suggestionsStart = 0;
+	if( text == "" && currentSearchSpace.length > 1 && currentSearchSpace[0].priority == tabPriority ) {
+		//for switching tabs bring the tab visited before the current one to the top
+		var temp = currentSearchSpace[0];
+		currentSearchSpace[0] = currentSearchSpace[1];
+		currentSearchSpace[1] = temp;
+	}
+	suggest(tabId);
 }
 
-function suggest () {
-	var suggestions = new Array();
-	var type, desc;
-	for(var i = 0, len = Math.min(currentSearchSpace.length, 6) ; i < len ; i++) {
-		switch(currentSearchSpace[i].priority) {
-			case 0:
-				type = "Domain";
-				break;
-			case 1:
-				type = "Bookmark";
-				break;
-			case 2:
-				type = "History";
-				break;
-		}
-		if( currentSearchSpace[i].urlLastMatched == searchText.length - 1 ) {
-			url = highlightText(currentSearchSpace[i].url, searchText);
+function suggest (tabId) {
+	//if no results, let the last ones appear
+	if( currentSearchSpace.length == 0 ) {
+		return;
+	}
+	var completions = [];
+	var len = Math.min(currentSearchSpace.length, maxResultsToShow + suggestionsStart);
+	for(var i = suggestionsStart ; i < len ; i++) {
+		currentSearchSpace[i].generateHtml();
+		if( currentSearchingIn == "tabs" ) {
+			completions.push( {
+				html: currentSearchSpace[i].html, 
+				id: currentSearchSpace[i].id
+			});
 		} else {
-			url = encodeXml(currentSearchSpace[i].url);
-		}
-		if( currentSearchSpace[i].titleLastMatched == searchText.length - 1 ) {
-			title = highlightText(currentSearchSpace[i].title, searchText);
-		} else {
-			title = encodeXml(currentSearchSpace[i].title);
-		}
-		desc = type + " - ";
-		if( title ) {
-			desc += title + " - ";
-		}
-		desc += url;
-		if( i == 0 ) {
-			chrome.omnibox.setDefaultSuggestion(Object( {description: desc} ));
-		} else {
-			suggestions[i - 1] = {content: currentSearchSpace[i].url, description: desc};
+			completions.push( {
+				html: currentSearchSpace[i].html,
+				url: currentSearchSpace[i].url
+			});
 		}
 	}
-
-	suggestFunction(suggestions);
+	if( !isDefined(ports[tabId]) ) {
+		console.log("Port for the requesting tab is not defined");
+		return;
+	}
+	ports[tabId].postMessage({
+		suggestions: completions,
+		searchedText: searchText
+	});
 }
 
+//messy code, might redo later
 function forwardSearch (startIdx) {
 	var newSearchSpace = [];
 	var temp;
@@ -131,6 +119,12 @@ function backwardSearch (endIdx) {
 		if( lastMatched  < endIdx ) {
 			continue;
 		} else if( lastMatched == endIdx ) {
+			if( sug.urlLastMatched == endIdx ) {
+				sug.penalty = sug.urlPenalty;
+			}
+			if( sug.titleLastMatched == endIdx ) {
+				sug.penalty = Math.min(sug.penalty, sug.titlePenalty);
+			}
 			newSearchSpace.push(sug);
 		} else {
 			sug.penalty = threshold + 1;
@@ -202,7 +196,8 @@ function calcEditDistance(text, pattern, dp, startIdx, currentPenalty) {
 	return new Object({penalty: penalty, lastMatched: m - 1});
 }
 
-function highlightText (text, pattern) {
+function highlightText (text) {
+	pattern = searchText;
 	var n = text.length, totalLen = pattern.length, query, m;
 	var terms = pattern.split(' ');
 	var highlight = [];
@@ -275,9 +270,9 @@ function highlightText (text, pattern) {
 	var hText = "";
 	for(var i = 0 ; i < n ; i++) {
 		if( highlight[i] ) {
-			hText += "<match>" + encodeXmlChar(text[i]) + "</match>";
+			hText += "<span class='omnibarMatch'>" + text[i] + "</span>";
 		} else {
-			hText += encodeXmlChar(text[i]);
+			hText += text[i];
 		}
 	}
 
@@ -291,15 +286,15 @@ function compareSuggestions (suggestion1, suggestion2) {
 		return false;
 	}
 
-	if( suggestion1.visitCount > suggestion2.visitCount ) {
-		return true;
-	} else if( suggestion1.visitCount < suggestion2.visitCount ) {
-		return false;
-	}
-
 	if( suggestion1.lastVisitTime > suggestion2.lastVisitTime ) {
 		return true;
 	} else if( suggestion1.lastVisitTime < suggestion2.lastVisitTime ) {
+		return false;
+	}
+
+	if( suggestion1.visitCount > 2 * suggestion2.visitCount ) {
+		return true;
+	} else if( suggestion1.visitCount < 2 * suggestion2.visitCount ) {
 		return false;
 	}
 
