@@ -1,13 +1,8 @@
-Fuzzy Search Chrome -
+Fuzzy Search -
 
 
 Using this extension you can fuzzy search through history, bookmarks and open tabs.
-Based on the size of the search space, it will allow 1 mistake per 4 or 5 characters.
-The mistakes can be of following types - 
-1. missing character.
-2. extra character.
-3. replacing character.
-4. swapping 2 adjacent characters.
+The number of allowed mistakes depends on the current length of search text. Based on the size of the search space, it will allow 1 mistake per 4 or 5 characters. The mistakes can be of following types - missing character, extra character, replacing character and swapping 2 adjacent characters.
 
 
 Availabe Shortcuts - 
@@ -18,7 +13,7 @@ Availabe Shortcuts -
 5. Next Results - Displays Next results.
 6. Previous Results - Displays Previous results.
 
-To define shortcuts - 
+To set or change shortcuts - 
 Open chrome://extensions. Click Keyboard Shortcuts link at the bottom of the page.
 
 Maximum 10 results are displayed at once.
@@ -34,4 +29,4 @@ Other inbuilt shortcuts -
 7. "delete" - Close the currently selected tab if searching in Tabs.
 
 
-If you find any bug or have performance issue, report it on the github page - https://github.com/NishantVar/FuzzySearchChrome
+If you find any bug or have performance issues, report it on the github page - https://github.com/NishantVar/FuzzySearchChrome

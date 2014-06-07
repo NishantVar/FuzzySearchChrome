@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Fuzzy Search - Chrome Extension</title>
+
+	<!-- Bootstrap Core CSS -->
+	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+	<!-- Fonts -->
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+	<!-- Custom Theme CSS -->
+	<link href="css/grayscale.css" rel="stylesheet">
+
+	<!-- Core JavaScript Files -->
+	<script type="text/javascript" src="jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="bootstrap.min.js"></script>
+	<script type="text/javascript" src="jquery.easing.min.js"></script>
+
+	<!-- Custom Theme JavaScript -->
+	<script src="grayscale.js"></script>
+
+
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+
+	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header page-scroll">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+					<i class="fa fa-bars"></i>
+				</button>
+				<a class="navbar-brand" href="#page-top">
+					<i class="fa fa-play-circle"></i>  <span class="light">Fuzzy Search</span>
+				</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+				<ul class="nav navbar-nav">
+					<!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+					<li class="hidden">
+						<a href="#page-top"></a>
+					</li>
+					<li class="page-scroll">
+						<a href="#about">About</a>
+					</li>
+					<li class="page-scroll">
+						<a href="#shortcuts">Shortcuts</a>
+					</li>
+					<li class="page-scroll">
+						<a href="#contact">Contact</a>
+					</li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container -->
+	</nav>
+
+	<section class="intro">
+		<div class="intro-body">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+						<h1 class="brand-heading">Fuzzy Search</h1>
+						<p class="intro-text">Chrome Extension for Fuzzy Searching History, Bookmarks and Tabs</p>
+						<div class="page-scroll">
+							<a href="#about" class="btn btn-circle">
+								<i class="fa fa-angle-double-down animated"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="about" class="container content-section text-center">
+		<div class="row">
+			<div class="col-lg-8 col-lg-offset-2">
+				<h2>About Fuzzy Search</h2>
+				<p>Using this extension you can fuzzy search through history, bookmarks and open tabs.</p>
+				<p>The number of allowed mistakes depends on the current length of search text. Based on the size of the search space, it will allow 1 mistake per 4 or 5 characters.</p>
+				<p>The mistakes can be of following types - missing character, extra character, replacing character and swapping 2 adjacent characters.</p>
+			</div>
+		</div>
+	</section>
+
+	<section id="shortcuts" class="content-section text-center">
+		<div class="download-section">
+			<div class="container">
+				<div class="col-lg-8 col-lg-offset-2">
+					<h2>Shortcuts</h2>
+					<p>
+					Availabe Shortcuts - 
+						</br>1. Search All - Fuzzy Search throught bookmarks and history.
+						</br>2. Search Bookmarks - Fuzzy Search through Bookmarks.
+						</br>3. Search Tabs - Fuzzy Search through Open tabs in all open windows.
+						</br>4. Edit Selected Url - Changes the text of search bar to the url of the selected result, if any.
+						</br>5. Next Results - Displays Next results.
+						</br>6. Previous Results - Displays Previous results.
+					</p>
+					<p>
+					To set or change shortcuts - Open Extensions Page(chrome://extensions). Click Keyboard Shortcuts link at the bottom of the page.
+					</p>
+					<p>
+					Maximum 10 results are displayed at once. The shortcut used to display the bar will also hide it.
+					</p>
+					<p>
+					Other inbuilt shortcuts - 
+					</br>1. "tab" or "Up arrow Key" or "ctrl + k" - select next result.
+					</br>2. "shift + tab" or "Down Arrow Key" or "ctrl + j" - select previous result
+					</br>3. "enter" - Open the selected url in New Tab and focus the new tab.
+					</br>4. "shift + enter" - Open the selected url in current tab.
+					</br>5. "alt + enter" - Open the selected url in New Tab without focusing it.
+					</br>6. "escape" - Hide the search bar. It can create conflict if you also use Vimium.
+					</br>7. "delete" - Close the currently selected tab if searching in Tabs.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="contact" class="container content-section text-center">
+		<div class="row">
+			<div class="col-lg-8 col-lg-offset-2">
+				<h2>Contact</h2>
+				<p>If you find any bug or have performance issues, report it on the github page.</p>
+				<ul class="list-inline banner-social-buttons">
+					<li><a href="https://github.com/NishantVar/FuzzySearchChrome" class="btn btn-default btn-lg">GitHub</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<div id="map"></div>
+
+
+</body>
+
+</html>

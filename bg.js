@@ -174,6 +174,12 @@ processMessage = function (request) {
 	}
 };
 
+chrome.runtime.onMessage.addListener(
+	function(request, sender, sendResponse) {
+		processMessage(request);
+	}
+);
+
 //added the function to allow search to run independently of the input
 //once started it keeps running until the bar is closed and runs the search when input is updated
 handlerFunction = function () {

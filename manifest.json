@@ -75,10 +75,13 @@
 
 	"description": "Nothing",
 	"browser_action": {
-		"default_icon": "fuzzy.png",
+		"default_icon": "fuzzy19.png",
 		"default_popup": "popup.html"
 	},
 	"icons": {
-		"16": "fuzzy.png"
+		"16": "fuzzy16.png",
+		"19": "fuzzy19.png",
+		"48": "fuzzy48.png",
+		"128": "fuzzy128.png"
 	}
 }
