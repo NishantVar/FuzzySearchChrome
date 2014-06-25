@@ -39,7 +39,7 @@ Suggestion = (function (priority, url, title, lastVisitTime, visitCount, id) {
 	Suggestion.prototype.generateHtml = function() {
 		var type = "Tab";
 		if( this.priority == bookmarkPriority ) {
-			type = "Bookamrk";
+			type = "Bookmark";
 		} else if( this.priority == domainPriority ) {
 			type = "Domain";
 		} else if( this.priority == historyPriority ) {
