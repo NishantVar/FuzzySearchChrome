@@ -153,7 +153,7 @@ tr.reset {
   color: black;
 }
 
-#fuzzy-search-omnibar li em, #omnibar li .omnibarTitle {
+#fuzzy-search-omnibar li em, #fuzzy-search-omnibar li .omnibarTitle {
   color: black;
   margin-left: 4px;
   font-weight: normal;
