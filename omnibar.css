@@ -47,12 +47,12 @@ tr.reset {
 }
 
 
-#omnibar ol, #omnibar ul {
+#fuzzy-search-omnibar ol, #fuzzy-search-omnibar ul {
   list-style: none;
   display: block;
 }
 
-#omnibar {
+#fuzzy-search-omnibar {
   display: block;
   position: fixed;
   width: 80%;
@@ -71,7 +71,7 @@ tr.reset {
   z-index: 99999996;
 }
 
-#omnibar input {
+#fuzzy-search-omnibar input {
   color: #000;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 20px;
@@ -87,7 +87,7 @@ tr.reset {
   box-sizing: border-box;
 }
 
-#omnibar .omnibarSearchArea {
+#fuzzy-search-omnibar .omnibarSearchArea {
   display: block;
   padding: 10px;
   background-color: #F1F1F1;
@@ -95,7 +95,7 @@ tr.reset {
   border-bottom: 1px solid #C6C9CE;
 }
 
-#omnibar ul {
+#fuzzy-search-omnibar ul {
   background-color: white;
   border-radius: 0 0 4px 4px;
   list-style: none;
@@ -103,7 +103,7 @@ tr.reset {
   padding-top: 0;
 }
 
-#omnibar li {
+#fuzzy-search-omnibar li {
   border-bottom: 1px solid #ddd;
   line-height: 1.1em;
   padding: 7px 10px;
@@ -112,26 +112,26 @@ tr.reset {
   position: relative;
 }
 
-#omnibar li:last-of-type {
+#fuzzy-search-omnibar li:last-of-type {
   border-bottom: none;
 }
 
-#omnibar li .omnibarTopHalf, #omnibar li .omnibarBottomHalf {
+#fuzzy-search-omnibar li .omnibarTopHalf, #fuzzy-search-omnibar li .omnibarBottomHalf {
   display: block;
   overflow: hidden;
 }
 
-#omnibar li .omnibarBottomHalf {
+#fuzzy-search-omnibar li .omnibarBottomHalf {
   font-size: 15px;
   margin-top: 3px;
   padding: 2px 0;
 }
 
-#omnibar li .omnibarSource {
+#fuzzy-search-omnibar li .omnibarSource {
   color: #777;
   margin-right: 4px;
 }
-#omnibar li .omnibarRelevancy {
+#fuzzy-search-omnibar li .omnibarRelevancy {
   position: absolute;
   right: 0;
   top: 0;
@@ -143,28 +143,28 @@ tr.reset {
   overflow: hidden;
 }
 
-#omnibar li .omnibarUrl {
+#fuzzy-search-omnibar li .omnibarUrl {
   white-space: nowrap;
   color: #224684;
 }
 
-#omnibar li .omnibarMatch {
+#fuzzy-search-omnibar li .omnibarMatch {
   font-weight: bold;
   color: black;
 }
 
-#omnibar li em, #omnibar li .omnibarTitle {
+#fuzzy-search-omnibar li em, #omnibar li .omnibarTitle {
   color: black;
   margin-left: 4px;
   font-weight: normal;
 }
-#omnibar li em { font-style: italic; }
-#omnibar li em .omnibarMatch, #omnibar li .omnibarTitle .omnibarMatch {
+#fuzzy-search-omnibar li em { font-style: italic; }
+#fuzzy-search-omnibar li em .omnibarMatch, #fuzzy-search-omnibar li .omnibarTitle .omnibarMatch {
   color: #333;
   text-decoration: underline;
 }
 
-#omnibar li.omnibarSelected {
+#fuzzy-search-omnibar li.omnibarSelected {
   background-color: #BBCEE9;
   font-weight: normal;
 }
