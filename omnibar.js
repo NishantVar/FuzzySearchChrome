@@ -6,17 +6,17 @@ Omnibar = (function () {
 
 	Omnibar = function() {
 		var omnibarUI = document.createElement("div");
-		omnibarUI.innerHTML = "<div id=\"omnibar\" class=\"reset\">\n  <div class=\"reset omnibarSearchArea\">\n    <input type=\"text\" class=\"reset\">\n  </div>\n  <ul class=\"reset\"></ul>\n</div>";
+		omnibarUI.innerHTML = "<div id=\"fuzzy-search-omnibar\" class=\"reset\">\n  <div class=\"reset omnibarSearchArea\">\n    <input type=\"text\" class=\"reset\">\n  </div>\n  <ul class=\"reset\"></ul>\n</div>";
 		omnibarUI.style.display = "none";
 		document.body.appendChild(omnibarUI);
 
 		this.box = omnibarUI;
-		this.input = document.querySelector("#omnibar input");
+		this.input = document.querySelector("#fuzzy-search-omnibar input");
 		var _this = this;
 		this.input.addEventListener("input", function() {
 			_this.sendSearchMessage();
 		});
-		this.completionList = document.querySelector("#omnibar ul");
+		this.completionList = document.querySelector("#fuzzy-search-omnibar ul");
 		this.completionList.style.display = "none";
 	};
 
