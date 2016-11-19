@@ -73,7 +73,7 @@
 		}
 	},	
 
-	"description": "Nothing",
+	"description": "Search your tabs, history, and all the internet via a popup omnibar with fuzzy string matching.",
 	"browser_action": {
 		"default_icon": "fuzzy19.png",
 		"default_popup": "popup.html"
